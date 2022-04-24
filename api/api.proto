@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package="/api";
+
+message Empty {}
+
+message ObjectData {
+  int64 ts = 1;
+  string name = 2;
+}
+
+message Object {
+  uint64 id = 1;
+  ObjectData data = 2;
+}
+
+message CreateReq {
+  string name = 1;
+}
+
+message GetReq {
+  uint64 id = 1;
+}
+
+message EditReq {
+  uint64 id = 1;
+  string name = 2;
+}
+
+message DelReq {
+  uint64 id = 1;
+}
+
+message CreateResp {
+  uint64 id = 1;
+}
+
+message GetResp {
+  Object object = 1;
+}
+
+service ObjectsService {
+  rpc CreateObject(CreateReq) returns (CreateResp);
+  rpc GetObject(GetReq) returns (GetResp);
+  rpc EditObject(EditReq) returns (Empty);
+  rpc DeleteObject(DelReq) returns (Empty);
+}
